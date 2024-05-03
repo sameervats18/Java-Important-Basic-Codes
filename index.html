@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Java Imp</title>
+</head>
+<body>
+    <h2>Java Important Codes</h2>
+    <pre>
+<b>ANAGRAM</b>
+
+import java.util.Arrays;
+import java.util.Scanner;
+class Main {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    System.out.print("Enter first String: ");
+    String str1 = input.nextLine();
+    System.out.print("Enter second String: ");
+    String str2 = input.nextLine();
+    if(str1.length() == str2.length()) {
+      char[] charArray1 = str1.toCharArray();
+      char[] charArray2 = str2.toCharArray();
+      Arrays.sort(charArray1);
+      Arrays.sort(charArray2);
+      boolean result = Arrays.equals(charArray1, charArray2);
+      if(result) {
+        System.out.println(str1 + " and " + str2 + " are anagram.");
+      }
+      else {
+        System.out.println(str1 + " and " + str2 + " are not anagram.");
+      }
+    }
+    else {
+      System.out.println(str1 + " and " + str2 + " are not anagram.");
+    }
+    input.close();
+  }
+}
+
+<b>PALINDROME</b>
+
+import java.util.Scanner;
+class Main {
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+    System.out.print("Enter a string to check if it's a palindrome: ");
+    String str = scanner.nextLine();
+    String reverseStr = "";
+    int strLength = str.length();
+    for (int i = strLength - 1; i >= 0; --i) {
+      reverseStr += str.charAt(i);
+    }
+    if (str.toLowerCase().equals(reverseStr.toLowerCase())) {
+      System.out.println(str + " is a Palindrome String.");
+    } else {
+      System.out.println(str + " is not a Palindrome String.");
+    }
+    scanner.close();
+  }
+}
+
+<b>REVERSED</b>
+
+import java.util.Scanner;
+
+class GFG {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a word to reverse: ");
+        String str = scanner.nextLine();
+        String nstr = "";
+        char ch;
+        System.out.println("Original word: " + str);
+        for (int i = 0; i < str.length(); i++) {
+            ch = str.charAt(i);
+            nstr = ch + nstr;
+        }
+        System.out.println("Reversed word: " + nstr);
+        scanner.close();
+    }
+}
+
+<b>DD-MM-YYYY</b>
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.Scanner;
+public class DateDifference {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        System.out.print("Enter the first date (dd-MM-yyyy): ");
+        String firstDateStr = scanner.nextLine();
+        System.out.print("Enter the second date (dd-MM-yyyy): ");
+        String secondDateStr = scanner.nextLine();
+        LocalDate firstDate = LocalDate.parse(firstDateStr, formatter);
+        LocalDate secondDate = LocalDate.parse(secondDateStr, formatter);
+        long daysBetween = ChronoUnit.DAYS.between(firstDate, secondDate);
+        System.out.println("Number of days between the two dates: " + Math.abs(daysBetween));
+        scanner.close();
+    }
+}
+
+<b>STRING REPLACE (FILE)</b>
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
+public class ReplaceStringInFile {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the file path: ");
+        String filePath = scanner.nextLine();
+        System.out.print("Enter the string to replace: ");
+        String oldString = scanner.nextLine();
+        System.out.print("Enter the replacement string: ");
+        String newString = scanner.nextLine();
+        try {
+            String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+            String modifiedContent = fileContent.replace(oldString, newString);
+            FileWriter fileWriter = new FileWriter(filePath);
+            fileWriter.write(modifiedContent);
+            fileWriter.close();
+            System.out.println("String replaced successfully.");
+        } catch (IOException e) {
+            System.out.println("Error occurred while accessing the file: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
+
+<b>IF - ELSE</b>
+
+import java.util.Scanner;
+public class SchoolGrade {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter your marks (0-100): ");
+        int marks = scanner.nextInt();
+        if (marks >= 90) {
+            System.out.println("Your grade is A+.");
+        } else if (marks >= 80) {
+            System.out.println("Your grade is A.");
+        } else if (marks >= 70) {
+            System.out.println("Your grade is B.");
+        } else if (marks >= 60) {
+            System.out.println("Your grade is C.");
+        } else if (marks >= 50) {
+            System.out.println("Your grade is D.");
+        } else if (marks >= 40) {
+            System.out.println("Your grade is E.");
+        } else {
+            System.out.println("Your grade is F.");
+        }
+        scanner.close();
+    }
+}
+
+<b>FIBONACCI SERIES</b>
+
+import java.util.Scanner;
+public class FibonacciSeries {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int term1 = 0;
+        int term2 = 1;
+        System.out.println("Fibonacci series:");
+        for (int i = 1; i <= n; i++) {
+            System.out.print(term1 + " ");
+            int nextTerm = term1 + term2;
+            term1 = term2;
+            term2 = nextTerm;
+        }
+        System.out.println();
+        scanner.close();
+    }
+}
+
+<b>STACK PUSH SEARCH</b>
+
+import java.util.Scanner;
+class Stack {
+    private static final int MAX_SIZE = 30;
+    private int[] arr;
+    private int top;
+    public Stack() {
+        arr = new int[MAX_SIZE];
+        top = -1;
+    }
+    public boolean isEmpty() {
+        return top == -1;
+    }
+    public boolean isFull() {
+        return top == MAX_SIZE - 1;
+    }
+    public void push(int value) {
+        if (isFull()) {
+            System.out.println("Stack overflow. Unable to push element " + value);
+        } else {
+            arr[++top] = value;
+        }
+    }
+    public boolean search(int value) {
+        if (isEmpty()) {
+            System.out.println("Stack is empty. Cannot search.");
+            return false;
+        }
+        for (int i = 0; i <= top; i++) {
+            if (arr[i] == value) {
+                System.out.println("Element " + value + " found at position " + i);
+                return true;
+            }
+        }
+        System.out.println("Element " + value + " not found in the stack.");
+        return false;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of elements to push onto the stack: ");
+        int n = scanner.nextInt();
+        Stack stack = new Stack();
+        System.out.println("Enter " + n + " elements to push onto the stack:");
+        for (int i = 0; i < n; i++) {
+            int element = scanner.nextInt();
+            stack.push(element);
+        }
+        System.out.print("Enter an element to search in the stack: ");
+        int searchElement = scanner.nextInt();
+        stack.search(searchElement);
+        scanner.close();
+    }
+}
+
+
+<b>VOWEL REMOVER (FILE)</b>
+
+import java.io.*;
+import java.util.HashSet;
+import java.util.Set;
+public class RemoveVowelsFromFile {
+    public static String removeVowels(String input) {
+        Set< Character > vowels = new HashSet<>();
+        vowels.add('a');
+        vowels.add('e');
+        vowels.add('i');
+        vowels.add('o');
+        vowels.add('u');
+        vowels.add('A');
+        vowels.add('E');
+        vowels.add('I');
+        vowels.add('O');
+        vowels.add('U');
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (!vowels.contains(c)) {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            System.out.println("Please provide the file path as an argument.");
+            return;
+        }
+        String filePath = args[0]; 
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(removeVowels(line));
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+        }
+    }
+}
+
+<b>LOOP ADDITION</b>
+
+import java.util.Scanner;
+public class SumOfNaturalNum{
+public static void main(String[] args){
+	Scanner scanner = new Scanner(System.in);
+	int N= scanner.nextInt();
+	int sum = 0;
+	for(int i=1; i<=N; i++){
+	sum += i;
+		}
+		System.out.println(sum);
+	}
+}
+
+<b>BASIC DOUBLE USE</b>
+
+import java.util.Scanner;
+public class Expense Tracker {
+public static void main(String[] args) {
+Scanner scanner = new Scanner(System.in);
+double costPerCoffee = scanner.nextDouble();
+int coffeesPerDay = scanner.nextInt();
+double weekly = (double) (costPerCoffee*coffeesPerDay*7);
+System.out.println(weekly);
+}
+}
+
+<b>BASIC STRING INPUTS</b>
+
+1) String str = new String();
+if(str=="Hello")
+
+2) Scanner sc = new Scanner(System.in);
+String str = sc.nextLine();
+if(str.equals("File1.txt"))
+
+<b>MEDIAN FINDER</b>
+
+import java.util.Arrays;
+import java.util.Scanner;
+public class CTJ17190 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please enter a series of float numbers separated by spaces:");
+        String inputLine = scanner.nextLine();
+        String[] inputValues = inputLine.split(" ");
+        float[] floatArray = new float[inputValues.length];
+        for (int i = 0; i < inputValues.length; i++) {
+            floatArray[i] = Float.parseFloat(inputValues[i]);
+        }
+        Arrays.sort(floatArray);
+        float median;
+        int length = floatArray.length;
+        if (length % 2 == 0) {
+            median = (floatArray[length / 2 - 1] + floatArray[length / 2]) / 2.0f;
+        } else {
+            median = floatArray[length / 2];
+        }
+        System.out.println("The median is: " + median);
+        scanner.close();
+    }
+}
+
+<b>UPPER LOWER CASE</b>
+
+import java.util.Scanner;
+public class ModifyString {
+public static void main(String[] args){
+Scanner sc = new Scanner(System.in);
+String inputString = sc.nextLine();
+String result = convertToLowerUpper(inputString);
+System.out.println(result);
+}
+private static String convertToLowerUpper(String inputString){
+int length = inputString.length();
+int halfLength = length / 2;
+String firstHalf = inputString.substring(0, halfLength).toLowerCase();
+String secondHalf = inputString.substring(halfLength).toUpperCase();
+return firstHalf + secondHalf;
+}
+}
+
+<b>DISTINCT CHARACTER</b>
+
+import java.util.HashSet;
+import java.util.Scanner;
+public class DistinctCharacters {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the first string:");
+        String firstString = scanner.nextLine();
+        System.out.println("Enter the second string:");
+        String secondString = scanner.nextLine();
+        HashSet< Character> uniqueChars = new HashSet<>();
+        for (char c : firstString.toCharArray()) {
+            uniqueChars.add(c);
+        }
+        for (char c : secondString.toCharArray()) {
+            uniqueChars.add(c);
+        }
+        StringBuilder result = new StringBuilder();
+        for (Character c : uniqueChars) {
+            result.append(c);
+        }
+        System.out.println("Distinct characters: " + result.toString());
+
+        scanner.close();
+    }
+}
+
+<b>DISTINCT NUMBERS</b>
+
+import java.util.HashSet;
+import java.util.Scanner;
+public class UniqueCharacterCounter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the first string: ");
+        String str1 = scanner.nextLine();
+        System.out.print("Enter the second string: ");
+        String str2 = scanner.nextLine();
+        HashSet< Character> uniqueCharacters = new HashSet<>();
+        for (char c : str1.toCharArray()) {
+            uniqueCharacters.add(c);
+        }
+        for (char c : str2.toCharArray()) {
+            uniqueCharacters.add(c);
+        }
+        int uniqueCount = uniqueCharacters.size();
+        System.out.println("The count of unique characters is: " + uniqueCount);
+        scanner.close();
+    }
+}
+
+<b>LARGEST NUMBER</b>
+
+import java.util.Scanner;
+
+public class LargestNumberFinder {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the array of numbers (comma-separated):");
+        String inputLine = scanner.nextLine();
+        String[] numberStrings = inputLine.split(",");
+        int largestNumber = Integer.MIN_VALUE;
+        for (String numberStr : numberStrings) {
+            int number = Integer.parseInt(numberStr.trim());
+            if (number > largestNumber) {
+                largestNumber = number;
+            }
+        }
+        System.out.println("The largest number in the sequence is: " + largestNumber);
+        scanner.close();
+    }
+}
+
+<b>RADIUS TO AREA</b>
+
+import java.util.Scanner;
+public class CircleCalculator {
+    public static final double PI = 3.14159265359;
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the radius of the circle:");
+        double radius = scanner.nextDouble();
+        // Calculate circumference
+        double circumference = 2 * PI * radius;
+        double area = PI * Math.pow(radius, 2);
+        System.out.println("Circumference of the circle: " + circumference);
+        System.out.println("Area of the circle: " + area);
+        scanner.close();
+    }
+}
+
+<b>WORD COUNTER</b>
+
+import java.util.Scanner;
+public class WordCounter {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a sentence:");
+        String sentence = scanner.nextLine();
+        // Split the sentence into words based on whitespace
+        String[] words = sentence.trim().split("\\s+");
+        int totalWords = words.length;
+        System.out.println("Total number of words in the sentence: " + totalWords);
+        scanner.close();
+    }
+}
+
+<b>PASSWORD CHECKER</b>
+
+import java.util.Scanner;
+public class PasswordChecker {
+    public static boolean isStrongPassword(String password) {
+        // Define password rules
+        int minLength = 8; // Minimum length for a strong password
+        boolean hasUpperCase = false;
+        boolean hasLowerCase = false;
+        boolean hasDigit = false;
+        boolean hasSpecialChar = false;
+        if (password.length() < minLength) {
+            return false; // Too short
+        }
+        for (int i = 0; i < password.length(); i++) {
+            char c = password.charAt(i);
+            if (Character.isUpperCase(c)) {
+                hasUpperCase = true;
+            } else if (Character.isLowerCase(c)) {
+                hasLowerCase = true;
+            } else if (Character.isDigit(c)) {
+                hasDigit = true;
+            } else if (isSpecialCharacter(c)) {
+                hasSpecialChar = true;
+            }
+            if (hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar) {
+                return true;
+            }
+        }
+        return hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar;
+    }
+    public static boolean isSpecialCharacter(char c) {
+        String specialCharacters = "!@#$%^&*()-_=+[]{}|;:',.<>?/`~";
+        return specialCharacters.indexOf(c) != -1;
+    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a password to check its strength:");
+        String password = scanner.nextLine();
+        int passwordLength = password.length();
+        boolean isStrong = isStrongPassword(password);
+        if (isStrong) {
+            System.out.println("The password is strong.");
+        } else {
+            System.out.println("The password is weak. A strong password should have:");
+            System.out.println("- At least 8 characters");
+            System.out.println("- Both upper and lower case letters");
+            System.out.println("- At least one digit");
+            System.out.println("- At least one special character");
+        }
+        System.out.println("Length of the password: " + passwordLength);
+        scanner.close();
+    }
+}
+
+<b>DIVISION</b>
+
+import java.util.Scanner;
+public class Division {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the numerator: ");
+        int numerator = scanner.nextInt();
+        System.out.print("Enter the denominator: ");
+        int denominator = scanner.nextInt();
+        if (denominator == 0) {
+            System.out.println("Error: Division by zero is not possible");
+        } else {
+            double result = (double) numerator / denominator;
+            System.out.println("Result: " + result);
+        }
+        scanner.close();
+    }
+}
+
+<b>SQUARE OF NUMBER</b>
+
+import java.util.Scanner;
+public class SquareCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        double number = scanner.nextDouble();
+        double square = number * number;
+        System.out.println("The square of " + number + " is: " + square);
+        scanner.close();
+    }
+}
+
+<b>REVERSED ELEMENT OR NUMBERS</b>
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Scanner;
+public class DequeReversal {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter elements for the deque separated by spaces: ");
+        String input = scanner.nextLine();
+        String[] elements = input.split(" ");
+        Deque< String> deque = new ArrayDeque<>();
+        for (String element : elements) {
+            deque.add(element);
+        }
+        System.out.print("Reversed deque: ");
+        Object[] dequeArray = deque.toArray();
+        for (int i = dequeArray.length - 1; i >= 0; i--) {
+            System.out.print(dequeArray[i] + " ");
+        }
+        System.out.println();
+        scanner.close();
+    }
+}
+
+<b>ANAGRAM GENERATOR</b>
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+public class AnagramGenerator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a word: ");
+        String word = scanner.nextLine();
+        List< String> anagrams = generateAnagrams(word);
+        System.out.println("Anagrams:");
+        for (String anagram : anagrams) {
+            System.out.println(anagram);
+        }
+        scanner.close();
+    }
+    private static List< String> generateAnagrams(String word) {
+        List< String> result = new ArrayList<>();
+        permute("", word, result);
+        return result;
+    }
+    private static void permute(String prefix, String str, List< String> result) {
+        int n = str.length();
+        if (n == 0) {
+            result.add(prefix);
+        } else {
+            for (int i = 0; i < n; i++) {
+                permute(prefix + str.charAt(i), str.substring(0, i) + str.substring(i + 1, n), result);
+            }
+        }
+    }
+}
+
+<b>MAXIMUM AND MINIMUM NUMBER</b>
+
+import java.util.Scanner;
+public class MinMaxFinder {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter integers one by one (enter a non-integer to stop):");
+        boolean firstInput = true;
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        while (scanner.hasNextInt()) {
+            int number = scanner.nextInt();
+            if (firstInput) {
+                max = number;
+                min = number;
+                firstInput = false;
+            } else {
+                if (number > max) {
+                    max = number;
+                }
+                if (number < min) {
+                    min = number;
+                }
+            }
+        }
+        System.out.println("Maximum: " + max);
+        System.out.println("Minimum: " + min);
+        scanner.close();
+    }
+}
+
+<b>THRESHOLD VALUE</b>
+
+import java.util.Scanner;
+import java.util.TreeSet;
+public class TreeSetThreshold {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter elements for the TreeSet, separated by spaces: ");
+        String input = scanner.nextLine();
+        TreeSet< Integer> treeSet = new TreeSet<>();
+        String[] elements = input.split(" ");
+        for (String element : elements) {
+            try {
+                int value = Integer.parseInt(element);
+                treeSet.add(value);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter integers only.");
+                scanner.close();
+                return;
+            }
+        }
+        System.out.print("Enter the threshold value: ");
+        int threshold = scanner.nextInt();
+        treeSet.headSet(threshold + 1).clear();
+        if (treeSet.isEmpty()) {
+            System.out.println("No greater elements");
+        } else {
+            System.out.print("TreeSet after filtering: ");
+            for (Integer element : treeSet) {
+                System.out.print(element + " ");
+            }
+            System.out.println();
+        }
+        scanner.close();
+    }
+}
+
+<b>THRESHOLD 2</b>
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+public class StudentGradesAboveThreshold {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the total number of students: ");
+        int totalStudents = scanner.nextInt();
+        System.out.print("Enter the grades of students (space-separated): ");
+        List< Integer> grades = new ArrayList<>();
+        for (int i = 0; i < totalStudents; i++) {
+            grades.add(scanner.nextInt());
+        }
+        System.out.print("Enter the threshold grade: ");
+        int threshold = scanner.nextInt();
+        System.out.println("Grades above the threshold:");
+        boolean found = false;
+        for (Integer grade : grades) {
+            if (grade > threshold) {
+                System.out.println(grade);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No grades above the threshold.");
+        }
+        scanner.close();
+    }
+}
+
+</pre>
+</body>
+</html>
